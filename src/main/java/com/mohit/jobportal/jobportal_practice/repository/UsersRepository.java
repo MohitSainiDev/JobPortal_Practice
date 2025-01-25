@@ -6,4 +6,6 @@ import com.mohit.jobportal.jobportal_practice.entity.Users;
 
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 
+	Users getUserByEmail(String email);
+
 }

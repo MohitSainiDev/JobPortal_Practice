@@ -101,10 +101,6 @@ public class Users {
 		this.userTypeId = userTypeId;
 	}
 
-	@Override
-	public String toString() {
-		return "Users [userId=" + userId + ", email=" + email + ", password=" + password + ", isActive=" + isActive
-				+ ", registrationDate=" + registrationDate + ", userTypeId=" + userTypeId + "]";
-	}
+
 
 }

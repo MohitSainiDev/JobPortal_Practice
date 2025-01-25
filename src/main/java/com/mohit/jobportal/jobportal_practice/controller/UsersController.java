@@ -21,6 +21,7 @@ public class UsersController {
 	@Autowired
 	private UsersTypeService usersTypeService;
 
+
 	@Autowired
 	private UsersService usersService;
 
@@ -33,7 +34,18 @@ public class UsersController {
 	}
 
 	@PostMapping("/register/new")
-	public String userRegistration(@Valid Users users) {
+	public String userRegistration(@Valid Users users,Model model) {
+		
+		Users extractedUser=usersService.getUserByEmail(users.getEmail());
+		if(extractedUser!=null)
+		{
+			model.addAttribute("error", "Email is already present");
+			List<UsersType> usersType = usersTypeService.getAll();
+			model.addAttribute("getAllTypes", usersType);
+			model.addAttribute("user", new Users());
+			return "register";
+		}
+
 		usersService.addNew(users);
 		return "dashboard";
 	}
