@@ -1,11 +1,13 @@
 package com.mohit.jobportal.jobportal_practice.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "recruiter_profile")
@@ -30,6 +32,9 @@ public class RecruiterProfile {
 	private String country;
 
 	private String company;
+
+	@Column(nullable = true, length = 64)
+	private String profilePhoto;
 
 	public RecruiterProfile() {
 		super();
@@ -114,6 +119,21 @@ public class RecruiterProfile {
 
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
+
+	@Transient
+	public String getPhotosImagePath() {
+		if (profilePhoto == null)
+			return null;
+		return "/photos/recruiter/" + userAccountId + "/" + profilePhoto;
 	}
 
 }
